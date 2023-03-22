@@ -10,6 +10,10 @@ class Images extends Model
     use HasFactory;
     protected $guarded =[];
 
+    protected $fillable = [
+        'image'
+    ];
+
     public function project()
     {
         return $this->belongsTo(Projects::class,'project_id','id');

@@ -42,8 +42,8 @@
 						<div class="card mg-b-20">
 							<div class="card-header pb-0">
 								
-									<a href="{{route('add.employee')}}" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
-											class="fas fa-plus"></i>&nbsp;  Add Employee</a>
+									<a href="{{route('add.client')}}" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
+											class="fas fa-plus"></i>&nbsp;  Add Client</a>
 											
 							</div>
 							<div class="card-body">
@@ -52,47 +52,38 @@
 										<thead>
 											<tr>
 												<th class="border-bottom-0">#</th>
-												<th class="border-bottom-0"> Name </th>
+												<th class="border-bottom-0"> First Name </th>
+												<th class="border-bottom-0"> last Name </th>
 												<th class="border-bottom-0">email</th>
-												<th class="border-bottom-0">position</th>
-												<th class="border-bottom-0">addetion salary</th>
-												<th class="border-bottom-0">position salary</th>
-												
-
-
+												<th class="border-bottom-0">phone</th>
 												
 											</tr>
 										</thead>
 										<tbody>
 											<?php $i=0 ?>
-											@foreach ($employees as $e)
+											@foreach ($clients as $client)
 												
 											
 												<?php $i++?>
 											
 											<tr>
 												<td>{{$i}}</td>
-												<td>
-													<a href="{{route('show.employee',$e->id)}}">{{$e->name}}</a>
-													</td>
-												<td>{{$e->email}}</td>
-                                              <td>
+												<td>{{$client->first_name}}</td>
+                                                <td>{{$client->last_name}} </td>
+												<td>{{$client->email}}</td>
 
-												{{$e->position->name}}
-
-											  </td>
-											  <td>{{$e->salary}}</td>
-                                              <td>{{$e->position->salary}}</td>
+											  <td>{{$client->phone}}</td>
+                                              
 											
 												<td>
 													<div class="dropdown">
 														<button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-primary"
 														data-toggle="dropdown" id="dropdownMenuButton" type="button"> options <i class="fas fa-caret-down ml-1"></i></button>
 														<div  class="dropdown-menu tx-13">
-															<a class="dropdown-item" href="{{route('edit.employee',$e->id)}}" class="text-info fas fa-trash-alt">Eite </a>
+															<a class="dropdown-item" href="{{route('edit.clinet',$client->id)}}" class="text-info fas fa-trash-alt">Eite </a>
 
 															
-															<a class="dropdown-item" href="{{route('delete_employee',$e->id)}}" class="text-danger fas fa-trash-alt">Delete </a>
+															<a class="dropdown-item" href="{{route('delete.client',$client->id)}}" class="text-danger fas fa-trash-alt">Delete </a>
 		
 																	
 															

@@ -52,11 +52,11 @@
 										<thead>
 											<tr>
 												<th class="border-bottom-0">#</th>
-												<th class="border-bottom-0"> Name </th>
-												<th class="border-bottom-0">email</th>
-												<th class="border-bottom-0">position</th>
-												<th class="border-bottom-0">addetion salary</th>
-												<th class="border-bottom-0">position salary</th>
+												<th class="border-bottom-0">Project Name </th>
+												<th class="border-bottom-0">Description</th>
+												<th class="border-bottom-0">status</th>
+												<th class="border-bottom-0">start_date</th>
+												<th class="border-bottom-0">end_date</th>
 												
 
 
@@ -65,7 +65,7 @@
 										</thead>
 										<tbody>
 											<?php $i=0 ?>
-											@foreach ($employees as $e)
+											@foreach ($projects as $project)
 												
 											
 												<?php $i++?>
@@ -73,32 +73,36 @@
 											<tr>
 												<td>{{$i}}</td>
 												<td>
-													<a href="{{route('show.employee',$e->id)}}">{{$e->name}}</a>
+													<a href="#">{{$project->name}}</a>
 													</td>
-												<td>{{$e->email}}</td>
+												<td>{{$project->description}}</td>
                                               <td>
 
-												{{$e->position->name}}
+												@if ($project->status == 'new')
+                                                <span class="text-success">{{$project->status}}</span>
+                                                @elseif ($project->status == 'started') 
+                                                <span class="text-info">{{$project->status}}</span>
+                                                @elseif ($project->status == 'pending')
+                                                <span class="text-danger">{{$project->status}}</span>
+                                                @elseif ($project->status == 'inprogress')
+                                                <span class="text-warning">{{$project->status}}</span>
+
+                                                @endif
 
 											  </td>
-											  <td>{{$e->salary}}</td>
-                                              <td>{{$e->position->salary}}</td>
+											  <td>{{$project->start_date}}</td>
+                                              <td>{{$project->end_date}}</td>
 											
 												<td>
 													<div class="dropdown">
 														<button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-primary"
 														data-toggle="dropdown" id="dropdownMenuButton" type="button"> options <i class="fas fa-caret-down ml-1"></i></button>
 														<div  class="dropdown-menu tx-13">
-															<a class="dropdown-item" href="{{route('edit.employee',$e->id)}}" class="text-info fas fa-trash-alt">Eite </a>
+															<a class="dropdown-item" href="{{route('edit.project',$project->id)}}" class="text-info fas fa-trash-alt">Eite </a>
 
 															
-															<a class="dropdown-item" href="{{route('delete_employee',$e->id)}}" class="text-danger fas fa-trash-alt">Delete </a>
-		
-																	
-															
-															
-
-															
+															<a class="dropdown-item" href="{{route('delete.project',$project->id)}}" class="text-danger fas fa-trash-alt">Delete </a>
+	
 														</div>
 													</div>
 													

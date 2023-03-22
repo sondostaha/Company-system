@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
+use App\Models\Employees;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,6 +67,40 @@ Route::post('update_employee/{id}',[EmployeeController::class,'update'])->name('
 
 //delete employee
 Route::get('delete_employee/{id}',[EmployeeController::class,'delete'])->name('delete_employee');
+
+//show employee
+Route::get('employee/{id}',[EmployeeController::class , 'show'])->name('show.employee');
+
+//add client
+Route::get('add_client',[ClientController::class,'create'])->name('add.client');
+Route::post('save_client',[ClientController::class,'store'])->name('save.client');
+
+//clients
+Route::get('clients',[ClientController::class,'index'])->name('clients');
+
+//edite client
+Route::get('edit_cient/{id}',[ClientController::class,'edite'])->name('edit.clinet');
+Route::post('update_client/{id}',[ClientController::class ,'update'])->name('update_client');
+
+//delete client
+Route::get('delete_client/{id}',[ClientController::class,'delete'])->name('delete.client');
+
+//add project
+Route::get('add_project',[ProjectController::class ,'create'])->name('add.project');
+Route::post('save_project',[ProjectController::class,'store'])->name('stre.project');
+
+//All projects
+Route::get('all_projects',[ProjectController::class,'index'])->name('all.projects');
+
+//edite project
+Route::get('edit_project/{id}',[ProjectController::class,'edit'])->name('edit.project');
+Route::post('update_client/{id}',[ProjectController::class ,'update'])->name('update_project');
+
+//delete
+Route::get('delete_project/{id}',[ClientController::class,'delete'])->name('delete.project');
+
+//new prjects
+Route::get('new_project',[ProjectController::class,'newProject'])->name('new.projects');
 
 //p_salary
 Route::get('p_salary/{id}',[PositionController::class ,'get_position_salary']);

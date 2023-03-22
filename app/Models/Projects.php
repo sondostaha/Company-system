@@ -9,7 +9,16 @@ class Projects extends Model
 {
     use HasFactory;
     protected $guraded = [];
-
+    protected $fillable =[
+        'company_id',
+        'name',
+        'description',
+        'document',
+        'status',
+        'start_date',
+       ' end_date',
+       'end_date'
+    ];
     public function company()
     {
         return $this->belongsTo(User::class,'company_id','id');

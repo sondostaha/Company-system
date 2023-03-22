@@ -121,5 +121,10 @@ class EmployeeController extends Controller
 
      return back();
    }
-  
+
+   public function show($id)
+   {
+      $employee = Employees::findOrFail($id);
+      return view('employees.show',compact('employee'));
+   }  
 }
