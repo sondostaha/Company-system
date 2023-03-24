@@ -22,7 +22,7 @@ class ClientController extends Controller
     {
     
         $request->validate([
-            'frist_name'=>'required',
+            'first_name'=>'required',
             'last_name'=>'required',
             'email'=>'required|email',
             'phone'=>'required|numeric',

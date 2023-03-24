@@ -42,8 +42,8 @@
 						<div class="card mg-b-20">
 							<div class="card-header pb-0">
 								
-									<a href="{{route('add.employee')}}" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
-											class="fas fa-plus"></i>&nbsp;  Add Employee</a>
+								<a href="{{route('add.project')}}" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
+									class="fas fa-plus"></i>&nbsp;  Add Project</a>
 											
 							</div>
 							<div class="card-body">

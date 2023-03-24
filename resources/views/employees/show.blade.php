@@ -56,10 +56,11 @@
                     
                     <p>Addetion salary : {{$employee->salary}}</p>
 
-                   
-                    <img src="{{$employee->img}}" class="img-fluid">
+                    {{-- <img src="employees/<?php// echo $employee['img'];?>" class="card-img-top" > --}}
+                    
+                    <img src="{{asset('employees/'.$employee->img)}}" class="card-img-top">
                     <hr>
-                   
+                   @dump(asset('employees'.'/'.$employee->img))
                     <hr>
                    
                         

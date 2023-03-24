@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clients;
+use App\Models\EmployeeProject;
+use App\Models\Employees;
 use App\Models\Images;
 use App\Models\ProjectPending_reason;
 use App\Models\Projects;
@@ -135,11 +138,87 @@ public function delete($id)
   return back();
 }
 
-public function newProject()
-{
-  $projects = Projects::where('status','new')->get();
-  return view('projects.newProject',compact('projects'));
-}
+  public function newProject()
+  {
+    $projects = Projects::where('status','new')->get();
+    return view('projects.newProject',compact('projects'));
+  }
+  public function startedProject()
+  {
+    $projects = Projects::where('status','started')->get();
+    return view('projects.startedProject',compact('projects'));
+  }
+  public function pendingProject()
+  {
+    $projects = Projects::where('status','pending')->get();
+    return view('projects.startedProject',compact('projects'));
+  }
+  public function Employee($id)
+  {
+    $project = Projects::findOrFail($id);
+    $pro = EmployeeProject::select('project_id')->where('project_id',$id)->get()->pluck('project_id')->toArray();
+    $employees = Employees::all()->except($pro);
+    return view('projects.selectProject',compact('employees','project'));
+  }
+  public function add_employee($employee_id,$project_id)
+  {
+
+     EmployeeProject::create([
+      'employee_id'=>$employee_id,
+      'project_id'=>$project_id
+     ]);
+     session()->flash('Add','employee selected successfully');
+     return back();
+  }
+  public function client($id)
+  {
+
+    $clients = Clients::where('project_id', $id)
+    ->exists();
+    if ($clients == true) {
+      session()->flash('Add_another','You already have a client in this project.if you want to replace this client please bek one');
+      $project = Projects::findOrFail($id);
+      $clients = Clients::where('project_id',$id)->exists();
+      $client = Clients::all()->except($clients);
+      return view('projects.replaceClinet',compact('client','project'));
+    } else
+    $project = Projects::findOrFail($id);
+    $clients = Clients::where('project_id',$id)->exists();
+    $client = Clients::all()->except($clients);
+    return  view('projects.addClient',compact('client','project'));
+  }
+
+  public function add_client($client_id  , $project_id)
+  {
+    $clients = Clients::where('project_id', $project_id)
+    ->exists();
+    if ($clients == true) {
+      session()->flash('Add_another','You already have a client in this project.if you want to replace this client please beake one');
+      $project = Projects::findOrFail($project_id);
+      $clients = Clients::where('project_id',$project_id)->exists();
+      $client = Clients::all()->except($clients);
+      return view('projects.replaceClinet',compact('client','project'));
+    } else
+    
+    Clients::whereIn('id',[$client_id])->update([
+      'project_id'=>$project_id,
+    ]);
+    session()->flash('Add','client added successfully');
+    return back();
+ 
+  }
+  public function replace_client($client_id  , $project_id)
+  {
+    
+    Clients::whereIn('id',[$client_id])->update([
+      'project_id'=> null,
+    ]);
+    // Clients::whereIn('id',[$client_id])->update([
+    //   'project_id'=> $project_id,
+    // ]);
+    session()->flash('Add','client replaced  successfully');
+    return back();
+  }
        
 }
 

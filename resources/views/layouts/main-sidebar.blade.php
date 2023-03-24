@@ -51,9 +51,9 @@
 						
 							<li><a class="slide-item" href="{{ route('new.projects') }}">new Projects  </a></li>
 						
-						    <li><a class="slide-item" href="{{ url('/' . $page='/') }}">Started projects </a></li>
+						    <li><a class="slide-item" href="{{ route('started.projects') }}">Started projects </a></li>
 						
-							<li><a class="slide-item" href="{{ url('/' . $page='/') }}"> Project Panding</a></li>
+							<li><a class="slide-item" href="{{ route('pending.projects') }}"> Project Panding</a></li>
 
 							<li><a class="slide-item" href="{{ route('add.project') }}"> Add project </a></li>
 						
@@ -106,7 +106,7 @@
 										<path d="M17.5,15.83c0.88,0,1.73,0.09,2.5,0.26v-1.52c-0.79-0.15-1.64-0.24-2.5-0.24c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,16.02,16.18,15.83,17.5,15.83z"/></g></g></svg>
 										<span class="side-menu__label">Settings</span><i class="angle fe fe-chevron-down"></i></a>
 						<ul class="slide-menu">
-							<li><a class="slide-item" href="{{ url('/' . $page='Position') }}">Position</a></li>
+							<li><a class="slide-item" href="{{ route('all_postions') }}">Position</a></li>
 							
 							
 						</ul>

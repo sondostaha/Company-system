@@ -24,9 +24,9 @@ class Projects extends Model
         return $this->belongsTo(User::class,'company_id','id');
     }
 
-    public function clients()
+    public function client()
     {
-        return $this->hasMany(Clients::class,'project_id','id');
+        return $this->belongsTo(Clients::class,'project_id','id');
     }
     public function employees()
     {
