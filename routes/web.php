@@ -103,7 +103,7 @@ Route::group(['prefix'=>'Project'],function(){
     Route::post('update/{id}',[ProjectController::class ,'update'])->name('update_project');
 
     //delete
-    Route::get('delete/{id}',[ClientController::class,'delete'])->name('delete.project');
+    Route::get('delete/{id}',[ProjectController::class,'delete'])->name('delete.project');
 
     //new prjects
     Route::get('new',[ProjectController::class,'newProject'])->name('new.projects');
@@ -114,16 +114,22 @@ Route::group(['prefix'=>'Project'],function(){
     //pending prjects
     Route::get('pending',[ProjectController::class,'pendingProject'])->name('pending.projects');
 
-    Route::get('add_employee/{id}',[ProjectController::class , 'Employee'])->name('select.employe');
+    Route::get('add/employees/{id}',[ProjectController::class , 'Employee'])->name('select.employe');
 
     Route::get('add_employee/{employee_id}/{project_id}',[ProjectController::class ,'add_employee'])->name('project_add_employee');
 
     Route::get('client/{id}',[ProjectController::class ,'client'])->name('project_client');
 
     Route::get('add_client/{client_id}/{project_id}',[ProjectController::class ,'add_client'])->name('project_add_client');
-    Route::get('replace_client/{client_id}/{project_id}',[ProjectController::class ,'replace_client'])->name('project_replace_client');
+    
 
+    //employees of project
+    Route::get('employees/{id}',[ProjectController::class ,'project_employees'])->name('project.employees');
+    //delete employee from project
+    Route::get('delete/employees/{id}',[ProjectController::class , 'delete_employee'])->name('project.delete.employee');
 
+    //show Project
+    Route::get('{id}',[ProjectController::class ,'show'])->name('show.projects');
 
 });
 

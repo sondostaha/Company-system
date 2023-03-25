@@ -47,20 +47,21 @@
            
                 <a href="{{route('employees')}}">Back</a>
                 <div class="table-responsive hoverable-table">
-{{-- 
-                  @foreach ($posts as $p ) --}}
-                      
+  
                  
                     <hr>
-                    <h1>Name :{{$employee->name}}</h1>
+                    <h1>Name :{{$Projects->name}}</h1>
                     
                     <p>Addetion salary : {{$employee->salary}}</p>
 
                     {{-- <img src="employees/<?php// echo $employee['img'];?>" class="card-img-top" > --}}
                     
-                    <img src="{{asset('employees/'.$employee->img)}}" class="card-img-top">
+                    <img src="{{asset('employees/'.$employee->name .'/'. $employee->img)}}" class="card-img-top">
                     <hr>
-                   @dump(asset('employees'.'/'.$employee->img))
+                   @dump(asset('employees'.'/'.$employee->name .'/'. $employee->img))
+                    <hr>
+                 
+                   
                     <hr>
                    
                         

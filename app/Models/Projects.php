@@ -26,11 +26,11 @@ class Projects extends Model
 
     public function client()
     {
-        return $this->belongsTo(Clients::class,'project_id','id');
+        return $this->belongsTo(Clients::class,'client_id','id');
     }
     public function employees()
     {
-        return $this->hasMany(Employees::class,'project_id','id');
+        return $this->belongsToMany(Employees::class,EmployeeProject::class,'project_id','employee_id');
     }
 
     public function position()

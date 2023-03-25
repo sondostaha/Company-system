@@ -18,8 +18,8 @@ class EmployeeProject extends Model
     {
         $this->hasMany(Projects::class ,'emplyee_id','id');
     }
-    public function employees()
+    public function employee()
     {
-        return $this->hasMany(Employees::class,'project_id','id');
+        return $this->belongsToMany(Employees::class,'project_id','id');
     }
 }

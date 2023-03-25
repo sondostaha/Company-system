@@ -56,6 +56,14 @@
 												<th class="border-bottom-0">status</th>
 												<th class="border-bottom-0">start_date</th>
 												<th class="border-bottom-0">end_date</th>
+												<th class="border-bottom-0">employees</th>
+												<th class="border-bottom-0">Options</th>
+												<th class="border-bottom-0"></th>
+											
+												
+
+
+
 												
 
 
@@ -72,7 +80,7 @@
 											<tr>
 												<td>{{$i}}</td>
 												<td>
-													<a href="#">{{$project->name}}</a>
+													<a href="{{route('show.projects',$project->id)}}">{{$project->name}}</a>
 													</td>
 												<td>{{$project->description}}</td>
                                               <td>
@@ -91,6 +99,12 @@
 											  </td>
 											  <td>{{$project->start_date}}</td>
                                               <td>{{$project->end_date}}</td>
+                                              <td><a href="{{route('project.employees',$project->id)}}">{{App\Models\EmployeeProject::where('project_id',$project->id)->count()}}</a></td>
+
+											
+											
+											
+                                              
 											
 												<td>
 													<div class="dropdown">
@@ -103,7 +117,7 @@
 															<a class="dropdown-item" href="{{route('delete.project',$project->id)}}" class="text-danger fas fa-trash-alt">Delete </a>
 															<a class="dropdown-item" href="{{route('select.employe',$project->id)}}" class="text-danger fas fa-trash-alt">Select Employees </a>
 															<a class="dropdown-item" href="{{route('project_client',$project->id)}}" class="text-danger fas fa-trash-alt">Add Client </a>
-
+															
 		
 																	
 															

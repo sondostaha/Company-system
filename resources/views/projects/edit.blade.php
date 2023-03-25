@@ -31,7 +31,15 @@
 @endsection
 @section('content')
 
-
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
     @if (session()->has('Edite'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -48,7 +56,7 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('stre.project')}}" method="post" enctype="multipart/form-data"
+                    <form action="{{route('update_project',$project->id)}}" method="post" enctype="multipart/form-data"
                         autocomplete="off">
                         {{ csrf_field() }}
                         {{-- 1 --}}

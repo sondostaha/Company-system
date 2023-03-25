@@ -15,7 +15,8 @@ class ProjectController extends Controller
 {
   public function index()
   {
-    $projects = Projects::all();
+    $projects = Projects::with('client')->get();
+    
     return view('projects.projects',compact('projects'));
   }
     public function create()
@@ -39,7 +40,7 @@ class ProjectController extends Controller
       $extintion = $file->getClientOriginalExtension();
       $project_name = $request->name;
       $file_name = uniqid().".".$extintion;
-      $file->move(public_path('projects/file'.$project_name), "$file_name");
+      $file->move(public_path('projects/file/'.$project_name), "$file_name");
 
         Projects::create([
             'company_id'=> Auth::id(),
@@ -65,7 +66,7 @@ class ProjectController extends Controller
             $image_n->move(public_path('projects/images/'.$project_name), "$image_name");
             
             $image->project_id = $project_id;
-            $image->image = $image_n;
+            $image->image = $image_name;
             $image->save();
           }
 
@@ -81,13 +82,22 @@ class ProjectController extends Controller
 
     public function update($id , Request $request)
     {
-
+      $request->validate([
+        'name'=>'required|string',
+        'description'=>'required|string',
+        'images'=>'required|array',
+        'document'=>'required|file',
+        'status'=>'required',
+        'start_date'=>'required|date',
+        'end_date'=>'required',
+      ]);
+      
       $project = Projects::findOrFail($id);
       $file = $request->file('document');
       $extintion = $file->getClientOriginalExtension();
       $project_name = $request->name;
       $file_name = uniqid().".".$extintion;
-      $file->move(public_path('projects/files'.$project_name), "$file_name");
+      $file->move(public_path('projects/files/'.$project_name), "$file_name");
 
       $project->update([
         'name' => $request->name,
@@ -114,7 +124,7 @@ class ProjectController extends Controller
     
       $image->update([
         'project_id'=>$project_id,
-        'image'=> $image_n
+        'image'=> $image_name
       ]);
 
      }
@@ -173,51 +183,61 @@ public function delete($id)
   public function client($id)
   {
 
-    $clients = Clients::where('project_id', $id)
-    ->exists();
-    if ($clients == true) {
-      session()->flash('Add_another','You already have a client in this project.if you want to replace this client please bek one');
-      $project = Projects::findOrFail($id);
-      $clients = Clients::where('project_id',$id)->exists();
-      $client = Clients::all()->except($clients);
-      return view('projects.replaceClinet',compact('client','project'));
-    } else
+    
     $project = Projects::findOrFail($id);
-    $clients = Clients::where('project_id',$id)->exists();
-    $client = Clients::all()->except($clients);
+    
+    $client = Clients::all();
     return  view('projects.addClient',compact('client','project'));
   }
 
   public function add_client($client_id  , $project_id)
   {
-    $clients = Clients::where('project_id', $project_id)
+    $clients = Projects::where('client_id', $client_id)
     ->exists();
-    if ($clients == true) {
-      session()->flash('Add_another','You already have a client in this project.if you want to replace this client please beake one');
-      $project = Projects::findOrFail($project_id);
-      $clients = Clients::where('project_id',$project_id)->exists();
-      $client = Clients::all()->except($clients);
-      return view('projects.replaceClinet',compact('client','project'));
-    } else
+    // if ($clients == true) 
+    // {
+    //   session()->flash('Add_another','You already have a client in this project.if you want to replace this client please beake one');
+
+    //   $project = Projects::where('client_id', $client_id);
+      
+    //   $clients = Clients::where('id',$project)->exists();
+    //   $client = Clients::all()->except($clients);
+    //   return view('projects.replaceClinet',compact('client','project'));
+    // } else
     
-    Clients::whereIn('id',[$client_id])->update([
-      'project_id'=>$project_id,
+    Projects::whereIn('id',[$project_id])->update([
+      'client_id'=>$client_id,
     ]);
     session()->flash('Add','client added successfully');
     return back();
  
   }
-  public function replace_client($client_id  , $project_id)
+ 
+
+  public function project_employees($id)
   {
-    
-    Clients::whereIn('id',[$client_id])->update([
-      'project_id'=> null,
+    $project_employees= EmployeeProject::select('employee_id')->where('project_id',$id)->get()->pluck('employee_id');
+
+      $employees = Employees::whereIn('id',$project_employees)->get();
+
+      return view('projects.projectEmployees',compact('employees'));
+  }
+
+  public function delete_employee($id)
+  {
+    $delete_employee = EmployeeProject::where([
+      'employee_id'=>$id
     ]);
-    // Clients::whereIn('id',[$client_id])->update([
-    //   'project_id'=> $project_id,
-    // ]);
-    session()->flash('Add','client replaced  successfully');
+    $delete_employee->delete($id);
+    session()->flash('Delete','Your Employee has deleted successfully');
     return back();
+  }
+
+  public function show($id)
+   {
+    $project = Projects::with('client','images','employees')->findOrFail($id);
+    return view('projects.show',compact('project'));
+    
   }
        
 }
