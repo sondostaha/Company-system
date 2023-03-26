@@ -43,7 +43,7 @@
 							<div class="card-header pb-0">
 								
 									<a href="{{route('add.client')}}" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
-											class="fas fa-plus"></i>&nbsp;  Add Client</a>
+											class="fas fa-plus"></i>&nbsp;   @lang('companySystem.Add Client')</a>
 											
 							</div>
 							<div class="card-body">
@@ -52,10 +52,10 @@
 										<thead>
 											<tr>
 												<th class="border-bottom-0">#</th>
-												<th class="border-bottom-0"> First Name </th>
-												<th class="border-bottom-0"> last Name </th>
-												<th class="border-bottom-0">email</th>
-												<th class="border-bottom-0">phone</th>
+												<th class="border-bottom-0">  @lang('companySystem.First Name') </th>
+												<th class="border-bottom-0"> @lang('companySystem.Last Name')</th>
+												<th class="border-bottom-0">@lang('companySystem.Email')</th>
+												<th class="border-bottom-0">@lang('companySystem.Phone')</th>
 												
 											</tr>
 										</thead>
@@ -78,12 +78,12 @@
 												<td>
 													<div class="dropdown">
 														<button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-primary"
-														data-toggle="dropdown" id="dropdownMenuButton" type="button"> options <i class="fas fa-caret-down ml-1"></i></button>
+														data-toggle="dropdown" id="dropdownMenuButton" type="button"> @lang('companySystem.options') <i class="fas fa-caret-down ml-1"></i></button>
 														<div  class="dropdown-menu tx-13">
-															<a class="dropdown-item" href="{{route('edit.clinet',$client->id)}}" class="text-info fas fa-trash-alt">Eite </a>
+															<a class="dropdown-item" href="{{route('edit.clinet',$client->id)}}" class="text-info fas fa-trash-alt">@lang('companySystem.Edite') </a>
 
 															
-															<a class="dropdown-item" href="{{route('delete.client',$client->id)}}" class="text-danger fas fa-trash-alt">Delete </a>
+															<a class="dropdown-item" href="{{route('delete.client',$client->id)}}" class="text-danger fas fa-trash-alt">@lang('companySystem.Delete') </a>
 		
 																	
 															

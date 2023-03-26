@@ -25,16 +25,16 @@
 					</div>
 				</div>
 				<ul class="side-menu">
-					<li class="side-item side-item-category">Company System </li>
+					<li class="side-item side-item-category"> @lang('companySystem.company system') </li>
 					<li class="slide">
 						<a class="side-menu__item" href="{{ url('/' . $page='dashboard') }}">
 							<svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24" ><path d="M0 0h24v24H0V0z" fill="none"/>
 							<path d="M5 5h4v6H5zm10 8h4v6h-4zM5 17h4v2H5zM15 5h4v2h-4z" opacity=".3"/>
 							<path d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z"/>
-						</svg><span class="side-menu__label">Home</span></a>
+						</svg><span class="side-menu__label">@lang('companySystem.Home')</span></a>
 					</li>
 					
-					<li class="side-item side-item-category">Projects</li>
+					<li class="side-item side-item-category">@lang('companySystem.Projects')</li>
 					<li class="slide">
 						</a>
 					</li>
@@ -43,19 +43,19 @@
 							<svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
 							<path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3"/>
 							<path d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg>
-							<span class="side-menu__label">Projects</span></span><i class="angle fe fe-chevron-down"></i></a>
+							<span class="side-menu__label">@lang('companySystem.Projects')</span></span><i class="angle fe fe-chevron-down"></i></a>
 						<ul class="slide-menu">
 						
 							
-							<li><a class="slide-item" href="{{route('all.projects')}}">All Projects  </a></li>
+							<li><a class="slide-item" href="{{route('all.projects')}}"> @lang('companySystem.All Projects')  </a></li>
 						
-							<li><a class="slide-item" href="{{ route('new.projects') }}">new Projects  </a></li>
+							<li><a class="slide-item" href="{{ route('new.projects') }}"> @lang('companySystem.new Projects')  </a></li>
 						
-						    <li><a class="slide-item" href="{{ route('started.projects') }}">Started projects </a></li>
+						    <li><a class="slide-item" href="{{ route('started.projects') }}"> @lang('companySystem.Started projects') </a></li>
 						
-							<li><a class="slide-item" href="{{ route('pending.projects') }}"> Project Panding</a></li>
+							<li><a class="slide-item" href="{{ route('pending.projects') }}">  @lang('companySystem.Project Panding')</a></li>
 
-							<li><a class="slide-item" href="{{ route('add.project') }}"> Add project </a></li>
+							<li><a class="slide-item" href="{{ route('add.project') }}"> @lang('companySystem.Add Project')  </a></li>
 						
 							
 			
@@ -65,37 +65,41 @@
 					
 						
 					
-					<li class="side-item side-item-category">Employess</li>
+					<li class="side-item side-item-category">
+						@lang('companySystem.Employees')
+					</li>
 					<li class="slide">
 						<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}">
 							<svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/>
 								<path d="M4 12c0 4.08 3.06 7.44 7 7.93V4.07C7.05 4.56 4 7.92 4 12z" opacity=".3"/>
 								<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2-15.86c1.03.13 2 .45 2.87.93H13v-.93zM13 7h5.24c.25.31.48.65.68 1H13V7zm0 3h6.74c.08.33.15.66.19 1H13v-1zm0 9.93V19h2.87c-.87.48-1.84.8-2.87.93zM18.24 17H13v-1h5.92c-.2.35-.43.69-.68 1zm1.5-3H13v-1h6.93c-.04.34-.11.67-.19 1z"/></svg>
-								<span class="side-menu__label">Employess</span><i class="angle fe fe-chevron-down"></i></a>
+								<span class="side-menu__label">					
+										@lang('companySystem.Employees')
+								</span><i class="angle fe fe-chevron-down"></i></a>
 						<ul class="slide-menu">
 							
-							<li><a class="slide-item" href="{{route('employees')}}">All Employees </a></li>
+							<li><a class="slide-item" href="{{route('employees')}}">@lang('companySystem.All Employees') </a></li>
 							
-							<li><a class="slide-item" href="{{route('add.employee')}}">Add Eployees </a></li>
+							<li><a class="slide-item" href="{{route('add.employee')}}"> @lang('companySystem.Add Employees') </a></li>
 							
 						</ul>
 					</li>
 				
 					
-					<li class="side-item side-item-category">Clients</li>
+					<li class="side-item side-item-category">@lang('companySystem.Clients')</li>
 					<li class="slide">
 						<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}">
 							<svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24" ><path d="M0 0h24v24H0V0z" fill="none"/>
 								<path d="M15 11V4H4v8.17l.59-.58.58-.59H6z" opacity=".3"/><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z"/></svg>
-								<span class="side-menu__label">Clients</span><i class="angle fe fe-chevron-down"></i></a>
+								<span class="side-menu__label">@lang('companySystem.Clients')</span><i class="angle fe fe-chevron-down"></i></a>
 						<ul class="slide-menu">
-							<li><a class="slide-item" href="{{ route('clients') }}">All Clients</a></li>
-							<li><a class="slide-item" href="{{ route('add.client') }}">Add Client </a></li>
+							<li><a class="slide-item" href="{{ route('clients') }}"> @lang('companySystem.Clients')</a></li>
+							<li><a class="slide-item" href="{{ route('add.client') }}"> @lang('companySystem.Add Client') </a></li>
 						</ul>
 					</li>
 				
 			
-					<li class="side-item side-item-category">Settings</li>
+					<li class="side-item side-item-category">@lang('companySystem.Settings')</li>
 					<li class="slide">
 						<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}">
 							<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" class="side-menu__icon" viewBox="0 0 24 24" ><g>
@@ -104,9 +108,9 @@
 										<path d="M17.5,10.5c0.88,0,1.73,0.09,2.5,0.26V9.24C19.21,9.09,18.36,9,17.5,9c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,10.69,16.18,10.5,17.5,10.5z"/>
 										<path d="M17.5,13.16c0.88,0,1.73,0.09,2.5,0.26V11.9c-0.79-0.15-1.64-0.24-2.5-0.24c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,13.36,16.18,13.16,17.5,13.16z"/>
 										<path d="M17.5,15.83c0.88,0,1.73,0.09,2.5,0.26v-1.52c-0.79-0.15-1.64-0.24-2.5-0.24c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,16.02,16.18,15.83,17.5,15.83z"/></g></g></svg>
-										<span class="side-menu__label">Settings</span><i class="angle fe fe-chevron-down"></i></a>
+										<span class="side-menu__label">@lang('companySystem.Settings')</span><i class="angle fe fe-chevron-down"></i></a>
 						<ul class="slide-menu">
-							<li><a class="slide-item" href="{{ route('all_postions') }}">Position</a></li>
+							<li><a class="slide-item" href="{{ route('all_postions') }}">@lang('companySystem.Position')</a></li>
 							
 							
 						</ul>

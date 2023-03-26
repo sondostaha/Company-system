@@ -13,23 +13,23 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="left-content">
 						<div>
-						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi {{Auth::user()->name}} , welcome back!</h2>
-						  <p class="mg-b-0">Company System   </p>
+						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">@lang('companySystem.Hi') {{Auth::user()->name}} ,  @lang('companySystem.Welcome Back')!</h2>
+						  <p class="mg-b-0"> @lang('companySystem.company system')   </p>
 						</div>
 					</div>
 					<div class="main-dashboard-header-right">
 						<div>
-							<label class="tx-13">Customer Ratings</label>
+							<label class="tx-13"> @lang('companySystem.Customer Ratings')</label>
 							<div class="main-star">
 								<i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star"></i> <span>(14,873)</span>
 							</div>
 						</div>
 						<div>
-							<label class="tx-13">Online Sales</label>
+							<label class="tx-13"> @lang('companySystem.Online Sales')</label>
 							<h5>563,275</h5>
 						</div>
 						<div>
-							<label class="tx-13">Offline Sales</label>
+							<label class="tx-13"> @lang('companySystem.Offline Sales')</label>
 							<h5>783,675</h5>
 						</div>
 					</div>
@@ -43,14 +43,14 @@
 						<div class="card overflow-hidden sales-card bg-primary-gradient">
 							<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
 								<div class="">
-									<h6 class="mb-3 tx-12 text-white"> All Projects </h6>
+									<h6 class="mb-3 tx-12 text-white">  @lang('companySystem.All Projects') </h6>
 								</div>
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
 											
 											<p class="mb-0 tx-12 text-white op-7">
-											numbers of projects    {{App\Models\Projects::count()}}
+											@lang('companySystem.new Projects')    {{App\Models\Projects::count()}}
 											</p>
 										</div>
 										<span class="float-right my-auto mr-auto">
@@ -67,14 +67,14 @@
 						<div class="card overflow-hidden sales-card bg-success-gradient">
 							<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
 								<div class="">
-									<h6 class="mb-3 tx-12 text-white">  all news projects</h6>
+									<h6 class="mb-3 tx-12 text-white">  @lang('companySystem.new Projects')</h6>
 								</div>
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
 											
 											<p class="mb-0 tx-12 text-white op-7">
-												 numbers of news projects  {{App\Models\Projects::where('status','new')->count()}}
+												@lang('companySystem.numbers of news projects')  {{App\Models\Projects::where('status','new')->count()}}
 											</p>
 										</div>
 										<span class="float-right my-auto mr-auto">
@@ -95,14 +95,14 @@
 						<div class="card overflow-hidden sales-card bg-danger-gradient">
 							<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
 								<div class="">
-									<h6 class="mb-3 tx-12 text-white"> The pending Projects </h6>
+									<h6 class="mb-3 tx-12 text-white"> @lang('companySystem.Project Panding') </h6>
 								</div>
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
 											
 											<p class="mb-0 tx-12 text-white op-7">
-												   numbers of the started projects  {{App\Models\Projects::where('status','pending')->count()}}
+												 @lang('companySystem.Project Panding')  {{App\Models\Projects::where('status','pending')->count()}}
 											</p>
 										</div>
 										<span class="float-right my-auto mr-auto">
@@ -123,14 +123,14 @@
 						<div class="card overflow-hidden sales-card bg-warning-gradient">
 							<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
 								<div class="">
-									<h6 class="mb-3 tx-12 text-white">All In Progress Projects  </h6>
+									<h6 class="mb-3 tx-12 text-white">@lang('companySystem.Numbers of the in progress projects')  </h6>
 								</div>
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
 											
 											<p class="mb-0 tx-12 text-white op-7">
-												    Numbers of the in progress projects  {{App\Models\Projects::where('status','inprogress')->count()}}
+												  @lang('companySystem.Numbers of the in progress projects')  {{App\Models\Projects::where('status','inprogress')->count()}}
 											</p>
 										</div>
 										<span class="float-right my-auto mr-auto">
@@ -153,14 +153,14 @@
 					<div class="card overflow-hidden sales-card bg-success-gradient">
 						<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
 							<div class="">
-								<h6 class="mb-3 tx-12 text-white">All Employees In The Company  </h6>
+								<h6 class="mb-3 tx-12 text-white">@lang('companySystem.All Employees In The Company') </h6>
 							</div>
 							<div class="pb-0 mt-0">
 								<div class="d-flex">
 									<div class="">
 										
 										<p class="mb-0 tx-12 text-white op-7">
-												Numbers of the  Employees Company is :  {{App\Models\Employees::count()}}
+												@lang('companySystem.Numbers of the Employees Company is')  {{App\Models\Employees::count()}}
 										</p>
 									</div>
 									
@@ -176,14 +176,14 @@
 				<div class="card overflow-hidden sales-card bg-success-gradient">
 					<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
 						<div class="">
-							<h6 class="mb-3 tx-12 text-white">All Clients In The Company  </h6>
+							<h6 class="mb-3 tx-12 text-white">@lang('companySystem.All Clients In The Company')  </h6>
 						</div>
 						<div class="pb-0 mt-0">
 							<div class="d-flex">
 								<div class="">
 									
 									<p class="mb-0 tx-12 text-white op-7">
-											Numbers of   Clients  in the Company is :  {{App\Models\Clients::count()}}
+										@lang('companySystem.Numbers of Clients in the Company is ') :  {{App\Models\Clients::count()}}
 									</p>
 								</div>
 								

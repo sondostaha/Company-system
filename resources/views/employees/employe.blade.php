@@ -43,7 +43,7 @@
 							<div class="card-header pb-0">
 								
 									<a href="{{route('add.employee')}}" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
-											class="fas fa-plus"></i>&nbsp;  Add Employee</a>
+											class="fas fa-plus"></i>&nbsp;   @lang('companySystem.Add Employees')</a>
 											
 							</div>
 							<div class="card-body">
@@ -52,11 +52,11 @@
 										<thead>
 											<tr>
 												<th class="border-bottom-0">#</th>
-												<th class="border-bottom-0"> Name </th>
-												<th class="border-bottom-0">email</th>
-												<th class="border-bottom-0">position</th>
-												<th class="border-bottom-0">addetion salary</th>
-												<th class="border-bottom-0">position salary</th>
+												<th class="border-bottom-0"> @lang('companySystem.Name') </th>
+												<th class="border-bottom-0">@lang('companySystem.email')</th>
+												<th class="border-bottom-0">@lang('companySystem.Position')</th>
+												<th class="border-bottom-0"> @lang('companySystem.addetion salary')</th>
+												<th class="border-bottom-0"> @lang('companySystem.position salary')</th>
 												
 
 
@@ -87,12 +87,12 @@
 												<td>
 													<div class="dropdown">
 														<button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-primary"
-														data-toggle="dropdown" id="dropdownMenuButton" type="button"> options <i class="fas fa-caret-down ml-1"></i></button>
+														data-toggle="dropdown" id="dropdownMenuButton" type="button"> @lang('companySystem.options') <i class="fas fa-caret-down ml-1"></i></button>
 														<div  class="dropdown-menu tx-13">
-															<a class="dropdown-item" href="{{route('edit.employee',$e->id)}}" class="text-info fas fa-trash-alt">Eite </a>
+															<a class="dropdown-item" href="{{route('edit.employee',$e->id)}}" class="text-info fas fa-trash-alt">@lang('companySystem.Edite') </a>
 
 															
-															<a class="dropdown-item" href="{{route('delete_employee',$e->id)}}" class="text-danger fas fa-trash-alt">Delete </a>
+															<a class="dropdown-item" href="{{route('delete_employee',$e->id)}}" class="text-danger fas fa-trash-alt">@lang('companySystem.Delete') </a>
 		
 																	
 															

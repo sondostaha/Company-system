@@ -51,13 +51,13 @@
 										<thead>
 											<tr>
 												<th class="border-bottom-0">#</th>
-												<th class="border-bottom-0">Project Name </th>
-												<th class="border-bottom-0">Description</th>
-												<th class="border-bottom-0">status</th>
-												<th class="border-bottom-0">start_date</th>
-												<th class="border-bottom-0">end_date</th>
-												<th class="border-bottom-0">employees</th>
-												<th class="border-bottom-0">Options</th>
+												<th class="border-bottom-0"> @lang('companySystem.project name') </th>
+												<th class="border-bottom-0">@lang('companySystem.descrption')</th>
+												<th class="border-bottom-0">@lang('companySystem.status')</th>
+												<th class="border-bottom-0">@lang('companySystem.start_date')</th>
+												<th class="border-bottom-0">@lang('companySystem.end_date')</th>
+												<th class="border-bottom-0">@lang('companySystem.Employees')</th>
+												<th class="border-bottom-0">@lang('companySystem.options')</th>
 												<th class="border-bottom-0"></th>
 											
 												
@@ -109,14 +109,14 @@
 												<td>
 													<div class="dropdown">
 														<button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-primary"
-														data-toggle="dropdown" id="dropdownMenuButton" type="button"> options <i class="fas fa-caret-down ml-1"></i></button>
+														data-toggle="dropdown" id="dropdownMenuButton" type="button"> @lang('companySystem.options') <i class="fas fa-caret-down ml-1"></i></button>
 														<div  class="dropdown-menu tx-13">
-															<a class="dropdown-item" href="{{route('edit.project',$project->id)}}" class="text-info fas fa-trash-alt">Eite </a>
+															<a class="dropdown-item" href="{{route('edit.project',$project->id)}}" class="text-info fas fa-trash-alt">@lang('companySystem.Edite') </a>
 
 															
-															<a class="dropdown-item" href="{{route('delete.project',$project->id)}}" class="text-danger fas fa-trash-alt">Delete </a>
-															<a class="dropdown-item" href="{{route('select.employe',$project->id)}}" class="text-danger fas fa-trash-alt">Select Employees </a>
-															<a class="dropdown-item" href="{{route('project_client',$project->id)}}" class="text-danger fas fa-trash-alt">Add Client </a>
+															<a class="dropdown-item" href="{{route('delete.project',$project->id)}}" class="text-danger fas fa-trash-alt">@lang('companySystem.Delete') </a>
+															<a class="dropdown-item" href="{{route('select.employe',$project->id)}}" class="text-danger fas fa-trash-alt"> @lang('companySystem.Select Employees') </a>
+															<a class="dropdown-item" href="{{route('project_client',$project->id)}}" class="text-danger fas fa-trash-alt">@lang('companySystem.Add Client')  </a>
 															
 		
 																	
