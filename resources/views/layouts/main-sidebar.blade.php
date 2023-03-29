@@ -25,7 +25,7 @@
 					</div>
 				</div>
 				<ul class="side-menu">
-					<li class="side-item side-item-category"> @lang('companySystem.company system') </li>
+					<li class="side-item side-item-category"> @lang('companySystem.Home') </li>
 					<li class="slide">
 						<a class="side-menu__item" href="{{ url('/' . $page='dashboard') }}">
 							<svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24" ><path d="M0 0h24v24H0V0z" fill="none"/>

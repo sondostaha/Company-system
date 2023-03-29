@@ -1,40 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Clients;
+use App\Http\Controllers\Controller;
 use App\Models\EmployeeProject;
 use App\Models\Employees;
 use App\Models\Images;
-use App\Models\ProjectPending_reason;
 use App\Models\Projects;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
 {
-  public function index()
+    public function index()
   {
-   // $projects = Projects::with('client')->get();
-    $projects = DB::table('projects')
-    ->leftJoin('clients' ,'clients.id','projects.client_id')
-    
-    ->select('projects.*','clients.first_name')
-    ->get();
-    //dd($projects);
-    return view('projects.projects',compact('projects'));
+    $projects = Projects::with('client')->get();
+    return response()->json($projects);
   }
-    public function create()
-    {
-        $project = Projects::all()->first();
-        return view('projects.add',compact('project'));
-    }
-    public function store(Request $request)
+    public function create(Request $request)
     {
         
-      $request->validate([
+      $validatedate = Validator::make($request->all(),[
         'name'=>'required|string',
         'description'=>'required|string',
         'images'=>'required|array',
@@ -43,6 +30,12 @@ class ProjectController extends Controller
         'start_date'=>'required|date',
         'end_date'=>'required',
       ]);
+      
+      if($validatedate->failed())
+      {
+          return response()->json(['error'=>true , 'message'=>'please check your data'],200); 
+      }
+
       $file = $request->file('document');
       $extintion = $file->getClientOriginalExtension();
       $project_name = $request->name;
@@ -63,42 +56,43 @@ class ProjectController extends Controller
 
          foreach ($request->file('images') as $imagefile) 
          {
-           // dd($imagefile);
             $image_n = $imagefile;
             $extintion = $image_n->getClientOriginalExtension();
             $project_name = $request->name;
             $image_name = uniqid().".".$extintion;
 
-            $image = new Images;
+            // $image = new Images;
             $image_n->move(public_path('projects/images/'.$project_name), "$image_name");
             
-            $image->project_id = $project_id;
-            $image->image = $image_name;
-            $image->save();
+            // $image->project_id = $project_id;
+            // $image->image = $image_name;
+            // $image->save();
+            Images::create([
+                'project_id'=>$project_id,
+                'image'=>$image_name
+            ]);
            
           }
 
-        session()->flash('Add','Project Added successfully');
-        return back();
+        return response()->json(['message'=>'project created successfully']);
     }
 
-    public function edit($id)
+    public function edite($id , Request $request)
     {
-      $project = Projects::findOrFail($id);
-      return view('projects.edit',compact('project'));
-    }
-
-    public function update($id , Request $request)
-    {
-      $request->validate([
-        'name'=>'required|string',
-        'description'=>'required|string',
-        'images'=>'required|array',
-        'document'=>'required|file',
-        'status'=>'required',
-        'start_date'=>'required|date',
-        'end_date'=>'required',
+        $validatedate = Validator::make($request->all(),[
+            'name'=>'required|string',
+            'description'=>'required|string',
+            'images'=>'required|array',
+            'document'=>'required|file',
+            'status'=>'required',
+            'start_date'=>'required|date',
+            'end_date'=>'required',
       ]);
+
+      if($validatedate->failed())
+      {
+          return response()->json(['error'=>true , 'message'=>'please check your data'],200); 
+      }
       
       $project = Projects::findOrFail($id);
       $file = $request->file('document');
@@ -107,7 +101,7 @@ class ProjectController extends Controller
       $file_name = uniqid().".".$extintion;
       $file->move(public_path('projects/files/'.$project_name), "$file_name");
 
-      $project->update([
+    $project_update =  $project->update([
         'name' => $request->name,
         'description' => $request->description,
         'document' => $file_name,
@@ -120,7 +114,7 @@ class ProjectController extends Controller
 
     foreach ($request->file('images') as $imagefile) 
     {
-      // dd($imagefile);
+
        $image_n = $imagefile;
        $extintion = $image_n->getClientOriginalExtension();
        $project_name = $request->name;
@@ -137,8 +131,7 @@ class ProjectController extends Controller
 
      }
 
-   session()->flash('Edite','Project Edited successfully');
-   return back();
+     return response()->json(['message'=>'project updated successfully',$project_update]);
 }
 public function delete($id)
 {
@@ -152,32 +145,26 @@ public function delete($id)
        }
   $project->delete($id);
 
-  session()->flash('Delete','Project Deleted successfully');
-  return back();
+  return response()->json(['message'=>'project deleted successfully']);
+
 }
 
   public function newProject()
   {
     $projects = Projects::where('status','new')->get();
-    return view('projects.newProject',compact('projects'));
+    return response()->json($projects);
   }
   public function startedProject()
   {
     $projects = Projects::where('status','started')->get();
-    return view('projects.startedProject',compact('projects'));
+    return response()->json($projects);
   }
   public function pendingProject()
   {
     $projects = Projects::where('status','pending')->get();
-    return view('projects.startedProject',compact('projects'));
+    return response()->json($projects);
   }
-  public function Employee($id)
-  {
-    $project = Projects::findOrFail($id);
-    $pro = EmployeeProject::select('project_id')->where('project_id',$id)->get()->pluck('project_id')->toArray();
-    $employees = Employees::all()->except($pro);
-    return view('projects.selectProject',compact('employees','project'));
-  }
+  
   public function add_employee($employee_id,$project_id)
   {
 
@@ -185,39 +172,21 @@ public function delete($id)
       'employee_id'=>$employee_id,
       'project_id'=>$project_id
      ]);
-     session()->flash('Add','employee selected successfully');
-     return back();
+     return response()->json(['message'=>'employee added in tour project successfully']);
   }
-  public function client($id)
-  {
-
-    
-    $project = Projects::findOrFail($id);
-    
-    $client = Clients::all();
-    return  view('projects.addClient',compact('client','project'));
-  }
-
+ 
   public function add_client($client_id  , $project_id)
   {
     $clients = Projects::where('client_id', $client_id)
     ->exists();
-    // if ($clients == true) 
-    // {
-    //   session()->flash('Add_another','You already have a client in this project.if you want to replace this client please beake one');
+    if($clients){
+    return response()->json(['message'=>'this client already exist']);
 
-    //   $project = Projects::where('client_id', $client_id);
-      
-    //   $clients = Clients::where('id',$project)->exists();
-    //   $client = Clients::all()->except($clients);
-    //   return view('projects.replaceClinet',compact('client','project'));
-    // } else
-    
+    }
     Projects::whereIn('id',[$project_id])->update([
       'client_id'=>$client_id,
     ]);
-    session()->flash('Add','client added successfully');
-    return back();
+    return response()->json(['message'=>'employee added in your project successfully']);
  
   }
  
@@ -228,7 +197,8 @@ public function delete($id)
 
       $employees = Employees::whereIn('id',$project_employees)->get();
 
-      return view('projects.projectEmployees',compact('employees'));
+      return response()->json($employees);
+
   }
 
   public function delete_employee($id)
@@ -237,37 +207,15 @@ public function delete($id)
       'employee_id'=>$id
     ]);
     $delete_employee->delete($id);
-    session()->flash('Delete','Your Employee has deleted successfully');
-    return back();
+    return response()->json(['message'=>'employee deleted from your project successfully']);
+
   }
 
   public function show($id)
    {
-   // $projects = Projects::findOrFail($id)->first();
-    
-     $project = DB::table('projects')
-     ->select('*')
-     //->join('clients' ,'clients.id','=','projects.client_id')
-     ->where('projects.id','=',$id)
-     ->first();
+    $projects = Projects::with('employees','images','client')->findOrFail($id)->first();
+    return response()->json($projects);
 
-     $project->images = DB::table('images')->select('images.image')
-     ->join('projects','projects.id', '=' ,'images.project_id')
-     ->where('project_id','=',$project->id)->get();
-
-     $project->employees = DB::table('employees')
-     ->select('employees.name as employee_name')
-     ->join('employee_projects','employee_projects.employee_id','=','employees.id')
-     ->join('projects','projects.id','=','employee_projects.project_id')
-     ->where('project_id','=',$project->id)->get();
-
-     
-   
-   // dd($project);
-
-    return view('projects.show',compact('project'));
     
   }
-    
 }
-

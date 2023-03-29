@@ -1,7 +1,7 @@
 <?php 
 return [
-
-'company system' => 'company system ',
+    'Home'=>'Home',
+    'company system' => 'company system ',
     'COMPANY SYSTEM' => 'COMPANY SYSTEM',
     'Projects' => 'Projects',
     'All Projects' => 'All Projects',

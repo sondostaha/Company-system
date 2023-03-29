@@ -64,7 +64,7 @@ Route::middleware('setapplang')->group( function()
         Route::post('save',[PositionController::class,'store'])->name('save.position');
         //edite position
         Route::get('edit/{id}',[PositionController::class,'edit'])->name('edit.position');
-        Route::post('update',[PositionController::class,'update'])->name('update.position');
+        Route::post('update/{id}',[PositionController::class,'update'])->name('update.position');
         //delete Position
         Route::get('delet/{id}',[PositionController::class,'delete'])->name('delete_position');
     
