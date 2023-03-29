@@ -109,6 +109,7 @@
                             <label>Choose Images</label>
                             <input type="file"  name="images[]" multiple>
                             </div>
+                           
                     </div>
                         <br>
                     <div class="col">

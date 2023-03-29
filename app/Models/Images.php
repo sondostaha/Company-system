@@ -11,7 +11,7 @@ class Images extends Model
     protected $guarded =[];
 
     protected $fillable = [
-        'image'
+        'image' , 'project_id'
     ];
 
     public function project()

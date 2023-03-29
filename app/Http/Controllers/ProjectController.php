@@ -9,14 +9,21 @@ use App\Models\Images;
 use App\Models\ProjectPending_reason;
 use App\Models\Projects;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
   public function index()
   {
-    $projects = Projects::with('client')->get();
+   // $projects = Projects::with('client')->get();
+    $projects = DB::table('projects')
+    ->leftJoin('clients' ,'clients.id','projects.client_id')
     
+    ->select('projects.*','clients.first_name')
+    ->get();
+    //dd($projects);
     return view('projects.projects',compact('projects'));
   }
     public function create()
@@ -68,6 +75,7 @@ class ProjectController extends Controller
             $image->project_id = $project_id;
             $image->image = $image_name;
             $image->save();
+           
           }
 
         session()->flash('Add','Project Added successfully');
@@ -235,10 +243,30 @@ public function delete($id)
 
   public function show($id)
    {
-    $project = Projects::with('client','images','employees')->findOrFail($id);
+   // $projects = Projects::findOrFail($id)->first();
+    
+     $project = DB::table('projects')
+     ->select('*')
+     //->join('clients' ,'clients.id','=','projects.client_id')
+     ->where('projects.id','=',$id)
+     ->first();
+
+     $project->images = DB::table('images')->select('images.image')
+      ->join('projects','projects.id', '=' ,'images.project_id')
+     ->where('project_id','=',$project->id)->get();
+
+     $project->employees = DB::table('employees')->select('employees.name as employee_name')
+     ->join('employee_projects','employee_projects.employee_id','=','employees.id')
+     ->join('projects','projects.id','=','employee_projects.project_id')
+     ->where('project_id','=',$project->id)->get();
+
+     
+   
+   // dd($project);
+
     return view('projects.show',compact('project'));
     
   }
-       
+    
 }
 

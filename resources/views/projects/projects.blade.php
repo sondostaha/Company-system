@@ -57,17 +57,9 @@
 												<th class="border-bottom-0">@lang('companySystem.start_date')</th>
 												<th class="border-bottom-0">@lang('companySystem.end_date')</th>
 												<th class="border-bottom-0">@lang('companySystem.Employees')</th>
+												<th class="border-bottom-0">@lang('companySystem.Clients')</th>
 												<th class="border-bottom-0">@lang('companySystem.options')</th>
 												<th class="border-bottom-0"></th>
-											
-												
-
-
-
-												
-
-
-												
 											</tr>
 										</thead>
 										<tbody>
@@ -101,7 +93,7 @@
                                               <td>{{$project->end_date}}</td>
                                               <td><a href="{{route('project.employees',$project->id)}}">{{App\Models\EmployeeProject::where('project_id',$project->id)->count()}}</a></td>
 
-											
+											<td>{{$project->first_name}}</td>
 											
 											
                                               

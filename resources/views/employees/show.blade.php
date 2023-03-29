@@ -50,8 +50,7 @@
   
                  
                     <hr>
-                    <h1>Name :{{$Projects->name}}</h1>
-                    
+                 
                     <p>Addetion salary : {{$employee->salary}}</p>
 
                     {{-- <img src="employees/<?php// echo $employee['img'];?>" class="card-img-top" > --}}

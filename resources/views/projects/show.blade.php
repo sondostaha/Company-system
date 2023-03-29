@@ -45,7 +45,7 @@
                
             <div class="card-body">
            
-                <a href="{{route('employees')}}">Back</a>
+                <a href="{{route('all.projects')}}">Back</a>
                 <div class="table-responsive hoverable-table">
 
                     
@@ -60,24 +60,23 @@
 
                     <h1> the Employees of project</h1>
                     <?php $i = 0 ?>
-                    
+                     
                     @foreach ($project->employees as $employee )
                     <?php $i++ ?>
                         <h1> </h1>
-                        <h2>{{ $i}} -<a href="{{route('project.employees',$project->id)}}">{{$employee->name}}</a></h2>
-                    @endforeach
-                    {{-- <h2>Number of Employees<a href="{{route('project.employees',$project->id)}}">{{App\Models\EmployeeProject::where('project_id',$project->id)->count()}}</a></h2> --}}
+                        <h2>{{ $i}} -<a href="{{route('project.employees',$project->id)}}">{{$employee->employee_name}}</a></h2>
+                    @endforeach  
+                   <h2>Number of Employees : <a href="{{route('project.employees',$project->id)}}">{{App\Models\EmployeeProject::where('project_id',$project->id)->count()}}</a></h2> 
                     
-                    {{-- <h3>{{$project->client->first_name}}</h3> --}}
+
+                    {{-- <h3>Client name : {{$project->first_name}}</h3> --}}
 
 
-                    @foreach($project->images as $image)
+                    @foreach($project->images as $images)
 
-                   
-                    <img src="{{asset('projects/images/'.$project->name.'/'.$image->image)}}" 
+                    <img src="{{asset('projects/images/'.$project->name.'/'.$images->image)}}" 
                     style="width:150px; height:150px;"> </td>
                     
-                   
                     @endforeach
                    
                  
