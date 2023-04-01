@@ -22,7 +22,8 @@ class PassportController extends Controller
         $token = $user->createToken('example')->accessToken;
         if(!$token)
         {
-            return response()->json(['error'=>true , 'message'=>'wwwww'],200); 
+            return response()->json(['error'=>true , 'message'=>'UnAuthorized'],200); 
+
         }
 
         return response()->json([
