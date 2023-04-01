@@ -30,6 +30,9 @@ Route::get('/', function () {
 Route::get('login', [AuthController::class ,'login'])->name('login');
 
 
+
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -158,4 +161,11 @@ Route::get('logout',[AuthController::class ,'logout'])->name('user.logout');
 
 //p_salary
 Route::get('p_salary/{id}',[PositionController::class ,'get_position_salary']);
+
+
 require __DIR__.'/auth.php';
+
+Route::get('/employee/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth:employee', 'verified'])->name('dashboard');
+require __DIR__.'/employe_auth.php';

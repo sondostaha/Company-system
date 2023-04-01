@@ -42,15 +42,15 @@ class ProjectController extends Controller
       $file_name = uniqid().".".$extintion;
       $file->move(public_path('projects/file/'.$project_name), "$file_name");
 
-        Projects::create([
-            'company_id'=> Auth::id(),
-            'name' => $request->name,
-            'description' => $request->description,
-            'document' => $file_name,
-            'status' => $request->status,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-        ]);
+      Projects::create([
+          'company_id'=> Auth::id(),
+          'name' => $request->name,
+          'description' => $request->description,
+          'document' => $file_name,
+          'status' => $request->status,
+          'start_date' => $request->start_date,
+          'end_date' => $request->end_date,
+      ]);
 
         $project_id = Projects::latest()->first()->id ;
 
@@ -61,12 +61,13 @@ class ProjectController extends Controller
             $project_name = $request->name;
             $image_name = uniqid().".".$extintion;
 
-            // $image = new Images;
+            $image = new Images;
             $image_n->move(public_path('projects/images/'.$project_name), "$image_name");
             
-            // $image->project_id = $project_id;
-            // $image->image = $image_name;
-            // $image->save();
+            $image->project_id = $project_id;
+            $image->image = $image_name;
+            $image->save();
+            
             Images::create([
                 'project_id'=>$project_id,
                 'image'=>$image_name
@@ -172,7 +173,7 @@ public function delete($id)
       'employee_id'=>$employee_id,
       'project_id'=>$project_id
      ]);
-     return response()->json(['message'=>'employee added in tour project successfully']);
+     return response()->json(['message'=>'employee added in to your project successfully']);
   }
  
   public function add_client($client_id  , $project_id)

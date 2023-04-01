@@ -7,10 +7,8 @@ use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\EmployeeController;
-
-
-
-
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\PassportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +20,11 @@ use App\Http\Controllers\Api\EmployeeController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('login',[AuthController::class, 'login']);
-Route::middleware('jwt.auth')->group(function(){
+// Route::post('login',[AuthController::class, 'login']);
+Route::post('login',[PassportController::class ,'login']);
+// Route::middleware('jwt.auth')->group(function(){
+Route::middleware('auth:api')->group(function(){
+
     Route::group(['prefix'=>'Company'],function()
         {
             Route::get('/positions',[PositionController::class,'index']);
@@ -102,8 +103,11 @@ Route::middleware('jwt.auth')->group(function(){
 
         //show Project
         Route::get('{id}',[ProjectController::class ,'show'])->name('show.projects');
+    });
+
 
         Route::post('/logout', [AuthController::class, 'logout']);
 
-    });
+   
 });
+

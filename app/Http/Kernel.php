@@ -66,5 +66,8 @@ class Kernel extends HttpKernel
         'setapplang'=>\App\HTTP\Middleware\SetAppLang::class,
         'jwt.auth' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
         'jwt.refresh' => \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
+        // 'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+        // 'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+
     ];
 }
