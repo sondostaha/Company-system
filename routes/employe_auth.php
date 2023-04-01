@@ -22,7 +22,7 @@ Route::group(['middleware'=>['guest:employee'] , 'prefix' => 'employee'], functi
     Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
-                ->name('login');
+                ->name('employee.login');
     
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 

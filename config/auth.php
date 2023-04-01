@@ -43,7 +43,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'passport',
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
 
@@ -51,10 +51,10 @@ return [
         //     'driver' => 'session',
         //     'provider' => 'users',
         // ],
-        // 'user_api' => [
-        //     'driver' => 'session',
-        //     'provider' => 'users',
-        // ],
+        'user_api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+        ],
 
         'employee' => [
             'driver' => 'session',
@@ -62,7 +62,7 @@ return [
         ],
 
         'employee-api' => [
-            'driver' => 'session',
+            'driver' => 'jwt',
             'provider' => 'employees',
         ],
       

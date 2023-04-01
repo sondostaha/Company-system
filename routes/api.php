@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\EmployeeAuthController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\PassportController;
@@ -21,7 +22,7 @@ use App\Http\Controllers\Api\PassportController;
 |
 */
 // Route::post('login',[AuthController::class, 'login']);
-Route::post('login',[PassportController::class ,'login']);
+Route::post('login',[AuthController::class ,'login']);
 // Route::middleware('jwt.auth')->group(function(){
 Route::middleware('auth:api')->group(function(){
 
@@ -109,5 +110,21 @@ Route::middleware('auth:api')->group(function(){
         Route::post('/logout', [AuthController::class, 'logout']);
 
    
+});
+Route::post('emlogin',[EmployeeAuthController::class , 'EmLog']);
+
+Route::group(['middelware'=> 'auth:employee-api' , 'perfix' => 'employee'] ,function() {
+
+    Route::group(['prefix'=>'company'],function()
+    {
+        Route::get('/positions',[PositionController::class,'index']);
+        Route::get('/employees',[EmployeeController::class,'index']);
+        Route::get('/clients',[ClientController::class,'index']);
+        Route::get('/projects',[ProjectController::class,'index']);
+    
+    
+    
+    });
+    Route::post('logout',[EmployeeAuthController::class , 'logout']);
 });
 

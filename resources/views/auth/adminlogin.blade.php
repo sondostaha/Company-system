@@ -27,7 +27,7 @@ Emlpoyee Login
 												<h2>Welcome </h2>
 												<p>Employee login</p>
 												<h5 class="font-weight-semibold mb-4"> Login </h5>
-                                                <form method="POST" action="{{ route('login') }}">
+                                                <form method="POST" action="{{ route('employee.login') }}">
                                                  @csrf
 													<div class="form-group">
 													<label>Emial </label>
