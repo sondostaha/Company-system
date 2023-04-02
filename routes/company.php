@@ -14,8 +14,9 @@ use App\Http\Controllers\Api\LoginController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('company/login',[LoginController::class, 'userLogin'])->name('userLogin');
+Route::post('companies/login',[LoginController::class, 'userLogin'])->name('userLogin');
     Route::group( ['middleware' => ['auth:user_api'] ],function(){
         // authenticated staff routes here 
         Route::get('dashboard',[LoginController::class, 'userDashboard']);
+        Route::POST('uslogout',[LoginController::class , 'userlogout']);
 });

@@ -19,7 +19,7 @@ class LoginController extends Controller
         return response()->json($success, 200);
     }
 
-    public function adminDashboard()
+    public function employeeDashboard()
     {
         $users = Employees::all();
         $success =  $users;
@@ -36,23 +36,41 @@ class LoginController extends Controller
         if($validator->fails()){
             return response()->json(['error' => $validator->errors()->all()]);
         }
-        $credentials = request(['email','password']);
-        $user = Auth::guard('user_api')->attempt($credentials);
-        
-        if($user){
+         $credentional = request(['email','password']);
 
-            config(['auth.guards.api.provider' => 'user_api']);
-            
-            $user = User::select('companies.*')->find(auth()->guard('user_api')->user()->id);
-            $success =  $user;
-            $success['token'] =  $user->createToken('MyApp',['company'])->accessToken; 
+        if( Auth::guard('user_api')->attempt($credentional))
+        {
+        $user =Auth::guard('user_api')->user();
 
-            return response()->json($success, 200);
-        }else{ 
-            return response()->json(['error' => ['Email and Password are Wrong.']], 200);
+        $token = $user->createToken('example')->accessToken;
+
+        return response()->json([
+            'access_token' => $token 
+        ]); 
+
+        }else{
+
+            return response()->json(['error'=>'Email or password incorrect'], 401);
+
         }
+
+        // if(Auth::guard('user_api')->attempt(['email' => request('email'), 'password' => request('password')])){
+        //     $user = Auth::guard('user_api')->user();
+        //     $success['token'] =  $user->createToken('MyApp')->accessToken;
+        //     return response()->json(['success' => $success], 200);
+        // }
+        // else{
+        //     return response()->json(['error'=>'Email or password incorrect'], 401);
+        // }
+
+       
     }
 
+    public function userlogout()
+    {
+        Auth::guard('user_api')->logout();
+        return response()->json(['error'=>false , 'message'=>'logout successfully'],200);
+    }
     public function employeeLogin(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -64,17 +82,35 @@ class LoginController extends Controller
             return response()->json(['error' => $validator->errors()->all()]);
         }
 
-        if(auth()->guard('employee')->attempt(['email' => request('email'), 'password' => request('password')])){
+        $credentional = request(['email','password']);
 
-            config(['auth.guards.api.provider' => 'employee']);
-            
-            $admin = Employees::select('employees.*')->find(auth()->guard('employees')->user()->id);
-            $success =  $admin;
-            $success['token'] =  $admin->createToken('MyApp',['employee'])->accessToken; 
+       if( Auth::guard('employee-api')->attempt($credentional)){
+        $user =Auth::guard('employee-api')->user();
 
-            return response()->json($success, 200);
-        }else{ 
-            return response()->json(['error' => ['Email and Password are Wrong.']], 200);
+        $token = $user->createToken('example')->accessToken;
+       
+        return response()->json([
+            'access_token' => $token 
+        ]);
+       }
+       else{
+            return response()->json(['error'=>'Email or password incorrect'], 401);
         }
+
+        
+        // if(Auth::guard('employee-api')->attempt(['email' => request('email'), 'password' => request('password')])){
+        //     $user = Auth::guard('employee-api')->user();
+        //     $success['token'] =  $user->createToken('MyApp')->accessToken;
+        //     return response()->json(['success' => $success], 200);
+        // }
+        // else{
+        //     return response()->json(['error'=>'Email or password incorrect'], 401);
+        // }
     }//
+
+    public function employeelogout()
+    {
+        Auth::guard('employee-api')->logout();
+        return response()->json(['error'=>false , 'message'=>'logout successfully'],200);
+    }
 }

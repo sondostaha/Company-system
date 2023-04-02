@@ -47,22 +47,29 @@ return [
             'provider' => 'users',
         ],
 
-        // 'user' => [
-        //     'driver' => 'session',
-        //     'provider' => 'users',
-        // ],
+
         'user_api' => [
-            'driver' => 'jwt',
+            'driver' => 'session',
             'provider' => 'users',
         ],
+
+        // 'user_api' => [
+        //     'driver' => 'jwt',
+        //     'provider' => 'users',
+        // ],
+
 
         'employee' => [
             'driver' => 'session',
             'provider' => 'employees',
         ],
 
+        // 'employee-api' => [
+        //     'driver' => 'jwt',
+        //     'provider' => 'employees',
+        // ],
         'employee-api' => [
-            'driver' => 'jwt',
+            'driver' => 'session',
             'provider' => 'employees',
         ],
       
